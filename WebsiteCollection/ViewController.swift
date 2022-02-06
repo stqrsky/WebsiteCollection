@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController {
 
@@ -15,6 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
     }
 
 }
@@ -30,4 +33,13 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let url = URL(string: urls[indexPath.row])
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true, completion: nil)
+                tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
