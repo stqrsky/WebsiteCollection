@@ -37,7 +37,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = URL(string: urls[indexPath.row])
+        guard let url = URL(string: urls[indexPath.row]) else {return}
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true, completion: nil)
                 tableView.deselectRow(at: indexPath, animated: true)
